@@ -51,29 +51,41 @@ const seeDetails = (phone) => {
     fetch(`https://openapi.programming-hero.com/api/phone/${phone}`)
         .then(resp => resp.json())
         .then(data => {
-            const allPhone = data.data;
-            console.log(allPhone.others)
+            const phoneInfo = data.data;
+            // const phoneDetails = document.getElementById('mobile-details');
+            console.log(phoneInfo)
+            console.log(phoneInfo?.releaseDate)
             const div = document.createElement('div');
             main.innerHTML = '';
             div.innerHTML = `
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img src="${allPhone.image}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Sensors: ${allPhone.mainFeatures.sensors}</p>
+                <div class="card mx-auto" style="width: 20rem;">
+                    <img src="${phoneInfo.image}" class="card-img-top" alt="...">
+                    <div class="card-body text-start">
+                        <h2 class="text-center text-success">${phoneInfo.brand}</h2>
+                        <h2 class="text-center text-success">${phoneInfo.name}</h2>
                         <div class="card-text">
-                        Other: 
-                        <h6>Bluetooth:${allPhone.others.Bluetooth}</h6>
-                        <h6>GPS:${allPhone.others.GPS}</h6>
-                        <h6>NFC:${allPhone.others.NFC}</h6>
-                        <h6>Radio:${allPhone.others.Radio}</h6>
-                        <h6>USB:${allPhone.others.USB}</h6>
-                        <h6>WLAN:${allPhone.others.WLAN}</h6>
-                        </div>
-
+                        <h5>First Release: ${phoneInfo.releaseDate ? phoneInfo.releaseDate : "No release date found"}</h5>
+                        <h2>Connectivity</h2>
+                        <p>WLAN: ${phoneInfo.others.WLAN}</p>
+                        <p>Bluetooth: ${phoneInfo.others.Bluetooth}</p>
+                        <p>GPS: ${phoneInfo.others.GPS}</p>
+                        <p>Radio: ${phoneInfo.others.Radio}</p>
+                        <p>USB: ${phoneInfo.others.USB}</p>
+                        <p>NFC: ${phoneInfo.others.NFC}</p>
+                        <p>WLAN: ${phoneInfo.name}</p>
+                        <h2>Performance</h2>
+                        <p>Chipset: ${phoneInfo.mainFeatures.chipSet}</p>
+                        <p>Display: ${phoneInfo.mainFeatures.displaySize}</p>
+                        <p>MicroSD Slot: ${phoneInfo.mainFeatures.storage}</p>
+                        <p>Chipset: ${phoneInfo.mainFeatures.sensors}</p>
+                    </div>
                     </div>
                 </div>
-            `;
+                `;
             phoneDetails.appendChild(div);
         })
 }
+
+
+
 
