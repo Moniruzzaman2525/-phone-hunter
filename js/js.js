@@ -1,3 +1,5 @@
+const container = document.getElementById('main');
+const phoneDetails = document.getElementById('mobile-details');
 const inputButton = document.getElementById('input-button').addEventListener('click', phone => {
     const input = document.getElementById('input-field');
     const inputField = input.value;
@@ -22,12 +24,12 @@ const phoneDisplay = (phones) => {
     if (phones.length === 0) {
         alert('hoto')
     }
-    const container = document.getElementById('main');
     const first20 = phones.slice(0, 20);
     for (const phone of first20) {
         // console.log(phone)
         const div = document.createElement('div');
         const phoneSlug = phone.slug;
+        phoneDetails.innerHTML = '';
         div.innerHTML = `
         <div class="col">
             <div class="card">
@@ -51,7 +53,6 @@ const seeDetails = (phone) => {
         .then(data => {
             const allPhone = data.data;
             console.log(allPhone.others)
-            const phoneDetails = document.getElementById('mobile-details');
             const div = document.createElement('div');
             main.innerHTML = '';
             div.innerHTML = `
@@ -59,15 +60,15 @@ const seeDetails = (phone) => {
                     <img src="${allPhone.image}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <p class="card-text">Sensors: ${allPhone.mainFeatures.sensors}</p>
-                        <p class="card-text">
+                        <div class="card-text">
                         Other: 
-                        Bluetooth:${allPhone.others.Bluetooth}
-                        GPS:${allPhone.others.GPS}
-                        NFC:${allPhone.others.NFC}
-                        Radio:${allPhone.others.Radio}
-                        USB:${allPhone.others.USB}
-                        WLAN:${allPhone.others.WLAN}
-                        </p>
+                        <h6>Bluetooth:${allPhone.others.Bluetooth}</h6>
+                        <h6>GPS:${allPhone.others.GPS}</h6>
+                        <h6>NFC:${allPhone.others.NFC}</h6>
+                        <h6>Radio:${allPhone.others.Radio}</h6>
+                        <h6>USB:${allPhone.others.USB}</h6>
+                        <h6>WLAN:${allPhone.others.WLAN}</h6>
+                        </div>
 
                     </div>
                 </div>
