@@ -2,16 +2,20 @@ const container = document.getElementById('main');
 const phoneDetails = document.getElementById('mobile-details');
 const inputButton = document.getElementById('input-button').addEventListener('click', phone => {
     const input = document.getElementById('input-field');
+    const error = document.getElementById('error');
     const inputField = input.value;
     // const phone = ['iphone' && 'samsung']
 
     if (!isNaN(input.value) || inputField == "") {
-        alert("please inter a phone name");
+        error.innerText = "please inter a some phone names";
+        container.innerHTML = '';
+        phoneDetails.innerHTML = '';
     }
     // else if (!phone) {
     //     alert('please inter a phone name')
     // }
     else {
+        main.innerHTML = '';
         fetch(`https://openapi.programming-hero.com/api/phones?search=${input.value}`)
             .then(resp => resp.json())
             .then(data => phoneDisplay(data.data))
@@ -22,13 +26,15 @@ const inputButton = document.getElementById('input-button').addEventListener('cl
 
 const phoneDisplay = (phones) => {
     if (phones.length === 0) {
-        alert('hoto')
+        error.innerText = "Please enter a phone name";
+        container.innerHTML = '';
+        phoneDetails.innerHTML = '';
     }
     const first20 = phones.slice(0, 20);
     for (const phone of first20) {
+        error.innerText = '';
         // console.log(phone)
         const div = document.createElement('div');
-        const phoneSlug = phone.slug;
         phoneDetails.innerHTML = '';
         div.innerHTML = `
         <div class="col">
@@ -37,7 +43,7 @@ const phoneDisplay = (phones) => {
                 <div class="card-body">
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">${phone.brand}</p>
-                <button onclick="seeDetails('${phone.slug}')">See Details</button>
+                <button class="btn btn-primary" onclick="seeDetails('${phone.slug}')">See Details</button>
                 </div>
             </div>
         </div>
