@@ -44,7 +44,7 @@ const phoneDisplay = (phones) => {
             <div class="card">
                 <img src="${phone.image}" class="card-img-top" alt="...">
                 <div class="card-body">
-                <h5 class="card-title text-success">${phone.phone_name}</h5>
+                <h4 class="card-title text-success">${phone.phone_name}</h4>
                 <p class="card-text text-info">${phone.brand}</p>
                 <button class="btn btn-primary" onclick="seeDetails('${phone.slug}')">See Details</button>
                 </div>
@@ -62,7 +62,7 @@ const seeDetails = (phone) => {
         .then(data => {
             const phoneInfo = data.data;
             // const phoneDetails = document.getElementById('mobile-details');
-            console.log(phoneInfo?.name)
+            console.log(phoneInfo)
             const div = document.createElement('div');
             // main.innerHTML = '';
             phoneDetails.innerHTML = '';
@@ -78,10 +78,11 @@ const seeDetails = (phone) => {
                             <h2 class="text-primary">Performance:</h2>
                             <p>Chipset: ${phoneInfo?.chipSet ? phoneInfo.chipSet : "No date found"}</p>
                             <p>Display: ${phoneInfo?.displaySize ? phoneInfo.displaySize : "No date found"}</p>
-                            <p>MicroSD Slot: ${phoneInfo?.mainFeatures?.storage ? phoneInfo.mainFeatures.storage : "No date found"}</p>
+                            <p>Strong: ${phoneInfo?.mainFeatures?.storage ? phoneInfo.mainFeatures.storage : "No date found"}</p>
+                            <p>memory: ${phoneInfo?.mainFeatures?.memory ? phoneInfo.mainFeatures.memory : "No date found"}</p>
                             <h5 class="text-success">Sensors:</h5> 
                             <p>${phoneInfo?.mainFeatures?.sensors ? phoneInfo.mainFeatures.sensors : "No date found"}</p>
-                            <h2 class="text-primary">Connectivity:</h2>
+                            <h2 class="text-primary">Others:</h2>
                             <p>WLAN: ${phoneInfo?.others?.WLAN ? phoneInfo.others.WLAN : "No date found"}</p>
                             <p>Bluetooth: ${phoneInfo?.others?.Bluetooth ? phoneInfo.others.Bluetooth : "No  date found"}</p>
                             <p>GPS: ${phoneInfo?.others?.GPS ? phoneInfo.others.GPS : "No date found"}</p>
